@@ -1,13 +1,15 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
-import { Bell, Search } from "lucide-react";
+import { Bell, Search, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from "@/hooks/useTheme";
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export function Layout({ children }: LayoutProps) {
+  const { theme, toggleTheme } = useTheme();
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
@@ -22,6 +24,14 @@ export function Layout({ children }: LayoutProps) {
               </div>
             </div>
             <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleTheme}
+                className="text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg"
+              >
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
               <Button variant="ghost" size="icon" className="relative text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg">
                 <Bell className="h-5 w-5" />
                 <span className="absolute -top-0.5 -right-0.5 h-4.5 w-4.5 rounded-full bg-accent text-[10px] font-bold flex items-center justify-center text-accent-foreground shadow-lg shadow-accent/30">
